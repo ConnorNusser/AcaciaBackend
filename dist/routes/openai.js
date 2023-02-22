@@ -6,12 +6,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const openai_1 = require("openai");
 const router = express_1.default.Router();
+const OpenApiKey = process.env.OPENAI_API_KEY;
 const configuration = new openai_1.Configuration({
     organization: "org-qRPRbD0Nm3qbT9gVq9ccynM1",
-    apiKey: "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",
+    apiKey: OpenApiKey,
 });
 const openai = new openai_1.OpenAIApi(configuration);
+const feedObj = [
+    {
+        "prompt": "content"
+    }
+];
 router.get('/getfeedinfo', async (req, res) => {
+    console.log("hi");
+    console.log(process.env.OPENAI_API_KEY);
     const response = await openai.createCompletion({
         model: "text-babbage-001",
         prompt: `Hi how's it going?`,

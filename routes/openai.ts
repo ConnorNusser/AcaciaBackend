@@ -1,14 +1,24 @@
 import express from 'express';
 import { Configuration, OpenAIApi } from "openai";
 const router = express.Router();
-
+const OpenApiKey = process.env.OPENAI_API_KEY;
 const configuration = new Configuration({
     organization: "org-qRPRbD0Nm3qbT9gVq9ccynM1",
-    apiKey: "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",
+    apiKey: OpenApiKey,
 });
 const openai = new OpenAIApi(configuration);
 
+
+
+const feedObj = [
+    {
+        "prompt": "content"
+    }]
+
+
 router.get('/getfeedinfo', async (req, res) => {
+    console.log("hi");
+    console.log(process.env.OPENAI_API_KEY)
     const response = await openai.createCompletion({
         model: "text-babbage-001",
         prompt: `Hi how's it going?`,
