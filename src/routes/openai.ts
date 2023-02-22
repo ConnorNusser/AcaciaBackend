@@ -16,9 +16,7 @@ const feedObj = [
     }]
 
 
-router.get('/getfeedinfo', async (req, res) => {
-    console.log("hi");
-    console.log(process.env.OPENAI_API_KEY)
+router.get('/', async (req, res) => {
     const response = await openai.createCompletion({
         model: "text-babbage-001",
         prompt: `Hi how's it going?`,
