@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const app_1 = require("../app");
 const openai_1 = require("openai");
 const router = express_1.default.Router();
-const OpenApiKey = process.env.OPENAI_API_KEY;
 const configuration = new openai_1.Configuration({
     organization: "org-qRPRbD0Nm3qbT9gVq9ccynM1",
-    apiKey: OpenApiKey,
+    apiKey: app_1.OpenApiKey,
 });
 const openai = new openai_1.OpenAIApi(configuration);
 const feedObj = [
