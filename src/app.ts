@@ -6,5 +6,5 @@ require('dotenv').config();
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
 });
-app.get('/', (req, res) => res.send("Hello from homepage"));
+app.get('/', (req, res) => res.send("Hello from 2323homepage"));
 app.use('/getfeedinfo', openAiRoutes);
