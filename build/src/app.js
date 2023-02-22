@@ -9,7 +9,7 @@ const openai_1 = __importDefault(require("./routes/openai"));
 const app = (0, express_1.default)();
 const port = 8000;
 require('dotenv').config();
-app.get('/', (req, res) => res.send("Hello from homepage"));
+app.get('/', (req, res) => res.send("Hello from 2323homepage"));
 app.use('/getfeedinfo', openai_1.default);
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
