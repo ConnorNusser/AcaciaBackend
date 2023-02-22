@@ -17,4 +17,5 @@ app.use(express_1.default.urlencoded({
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
 });
+console.log("hi");
 //# sourceMappingURL=app.js.map
