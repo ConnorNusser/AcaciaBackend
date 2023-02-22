@@ -10,9 +10,8 @@ app.use(
   express.urlencoded({
     extended: true,
   })
-);  
+);
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
 });
-console.log("hi");
 
