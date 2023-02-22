@@ -10,6 +10,10 @@ const port = 8000;
 require('dotenv').config();
 app.get('/', (req, res) => res.send("Hello from 2323homepage"));
 app.use('/getfeedinfo', openai_1.default);
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({
+    extended: true,
+}));
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
 });

@@ -10,21 +10,35 @@ const configuratonCreate = () => {
     return openai;
 }
 
-const feedObj = [
-    {
-        "prompt": "content"
-    }]
+type openAiParams = {
+    prompt: string,
+    max_tokens: number
+}
+router.post('/', async (req, res) => {
+    console.log(req);
+    const promptInfo = req.body;
+    console.log(promptInfo);
+    const openai = configuratonCreate();
+    const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: promptInfo.prompt,
+        max_tokens: promptInfo.max_tokens,
+        temperature: 0,
+      });
+    res.send(response.data);
+    console.log(response.data);
+});
 
-
-router.get('/', async (req, res) => {
+router.get('/', async (request, res) => {
     const openai = configuratonCreate();
     const response = await openai.createCompletion({
         model: "text-babbage-001",
-        prompt: `Hi how's it going?`,
+        prompt: `How's it going doc?`,
         max_tokens: 7,
         temperature: 0,
       });
     res.send(response.data);
+
 });
 
 export default router;
