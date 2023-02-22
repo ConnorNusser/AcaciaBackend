@@ -1,13 +1,14 @@
 import express from 'express';
-import { OpenApiKey } from '../app';
 const router = express.Router();
 const { Configuration, OpenAIApi } = require("openai");
-const configuration = new Configuration({
-    apiKey: "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",
-});
-const openai = new OpenAIApi(configuration);
 
-
+const configuratonCreate = () => {
+    const configuration = new Configuration({
+        apiKey: process.env.OpenAPIKEY,
+    });
+    const openai = new OpenAIApi(configuration);
+    return openai;
+}
 
 const feedObj = [
     {
@@ -16,6 +17,7 @@ const feedObj = [
 
 
 router.get('/', async (req, res) => {
+    const openai = configuratonCreate();
     const response = await openai.createCompletion({
         model: "text-babbage-001",
         prompt: `Hi how's it going?`,

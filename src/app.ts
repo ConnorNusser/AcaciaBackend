@@ -9,5 +9,3 @@ app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
 });
 
-export const OpenApiKey = process.env.OpenAi_API_KEY;
-console.log(OpenApiKey);
