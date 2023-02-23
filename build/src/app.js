@@ -12,6 +12,13 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({
     extended: true,
 }));
+const cors = require("cors");
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+    optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.get('/', (req, res) => res.send("Hello from 2323homepage"));
 app.use('/getfeedinfo', openai_1.default);
 app.listen(port, () => {
