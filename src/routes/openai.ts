@@ -15,9 +15,7 @@ type openAiParams = {
     max_tokens: number
 }
 router.post('/', async (req, res) => {
-    console.log(req);
     const promptInfo = req.body;
-    console.log(promptInfo);
     const openai = configuratonCreate();
     const response = await openai.createCompletion({
         model: "text-davinci-003",
@@ -26,19 +24,19 @@ router.post('/', async (req, res) => {
         temperature: 0,
       });
     res.send(response.data);
-    console.log(response.data);
 });
 
-router.get('/', async (request, res) => {
+
+router.post('/image', async (req, res) => {
+    const promptInfo = req.body;
     const openai = configuratonCreate();
-    const response = await openai.createCompletion({
-        model: "text-babbage-001",
-        prompt: `How's it going doc?`,
-        max_tokens: 7,
-        temperature: 0,
+    const response = await openai.createImage({
+        prompt: promptInfo.prompt,
+        n: 1,
+        size: "512x512",
       });
-    res.send(response.data);
-
+    res.send(response.data.data[0].url);
 });
+
 
 export default router;
