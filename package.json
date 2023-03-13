@@ -25,8 +25,11 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "cron": "^2.2.0",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
-    "openai": "^3.1.0"
+    "instagram-private-api": "^1.45.3",
+    "openai": "^3.1.0",
+    "request-promise": "^4.2.6"
   }
 }

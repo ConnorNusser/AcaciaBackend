@@ -16,23 +16,33 @@ const configuratonCreate = () => {
 router.post('/', async (req, res) => {
     const promptInfo = req.body;
     const openai = configuratonCreate();
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: promptInfo.prompt,
-        max_tokens: promptInfo.max_tokens,
-        temperature: 0,
-    });
-    res.send(response.data);
+    try {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: promptInfo.prompt,
+            max_tokens: promptInfo.max_tokens,
+            temperature: 0,
+        });
+        res.send(response.data);
+    }
+    catch (e) {
+        console.error(e);
+    }
 });
 router.post('/image', async (req, res) => {
     const promptInfo = req.body;
     const openai = configuratonCreate();
-    const response = await openai.createImage({
-        prompt: promptInfo.prompt,
-        n: 1,
-        size: "512x512",
-    });
-    res.send(response.data.data[0].url);
+    try {
+        const response = await openai.createImage({
+            prompt: promptInfo.prompt,
+            n: 1,
+            size: "512x512",
+        });
+        res.send(response.data.data[0].url);
+    }
+    catch (e) {
+        console.error(e);
+    }
 });
 exports.default = router;
 //# sourceMappingURL=openai.js.map
