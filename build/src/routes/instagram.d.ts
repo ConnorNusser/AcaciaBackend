@@ -1,3 +1,2 @@
-declare const IgApiClient: any;
-declare const get: any;
-declare const postToInsta: () => Promise<void>;
+declare const router: import("express-serve-static-core").Router;
+export default router;
