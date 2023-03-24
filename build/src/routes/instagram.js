@@ -29,6 +29,8 @@ const postToInsta = async (imageUrl, caption, igUserName, igPassword) => {
 };
 router.post('/', async (req, res) => {
     const promptInfo = req.body;
+    console.log(req.body);
+    console.log("------EOF")
     try {
         const response = await postToInsta(promptInfo.imageUrl, promptInfo.caption, promptInfo.igUserName, promptInfo.igPassword);
         if (response) {
