@@ -8,12 +8,10 @@ const { get } = require('request-promise');
 const sharp = require('sharp');
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
-const postToInsta = async (imageUrl, caption) => {
-    console.log(imageUrl);
-    console.log(caption);
+const postToInsta = async (imageUrl, caption, igUserName, igPassword) => {
     const ig = new IgApiClient();
-    ig.state.generateDevice(process.env.IG_USERNAME);
-    await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
+    ig.state.generateDevice(igUserName);
+    await ig.account.login(igUserName, igPassword);
     const imageBuffer = await get({
         url: imageUrl,
         encoding: null,
@@ -33,7 +31,7 @@ router.post('/', async (req, res) => {
     const promptInfo = req.body;
     console.log(promptInfo.imageUrl);
     try {
-        const response = await postToInsta(promptInfo.imageUrl, promptInfo.caption);
+        const response = await postToInsta(promptInfo.imageUrl, promptInfo.caption, promptInfo.igUserName, promptInfo.igPassword);
         if (response) {
             res.status(200).send("Sucessfully Submitted the post");
         }
