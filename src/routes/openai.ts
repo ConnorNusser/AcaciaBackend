@@ -18,13 +18,17 @@ router.post('/', async (req, res) => {
     const promptInfo = req.body;
     const openai = configuratonCreate();
     try{
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: promptInfo.prompt,
-        max_tokens: promptInfo.max_tokens,
-        temperature: 0,
-      });
-    res.send(response.data);
+        const completion = await openai.chat.completions.create({
+            messages: [
+                {
+                  role: "system",
+                  content: "You are a helpful assistant designed to output JSON.",
+                },
+                { role: "user", content: "Who won the world series in 2020?" },
+              ],
+              model: "gpt-3.5-turbo-0125",
+          });
+        
     }catch(e){
         console.error(e);
     }
