@@ -29,7 +29,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "instagram-private-api": "^1.45.3",
-    "openai": "^3.1.0",
+    "openai": "^4.28.0",
     "request-promise": "^4.2.6",
     "sharp": "^0.31.3"
   }

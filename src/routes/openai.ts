@@ -1,34 +1,29 @@
 import express from 'express';
+import OpenAI from 'openai';
+import { systemContent } from '../constants/promptInfo';
 const router = express.Router();
-const { Configuration, OpenAIApi } = require("openai");
 
-const configuratonCreate = () => {
-    const configuration = new Configuration({
-        apiKey: process.env.OpenAPIKEY,
-    });
-    const openai = new OpenAIApi(configuration);
-    return openai;
-}
 
-type openAiParams = {
-    prompt: string,
-    max_tokens: number
-}
+const openai = new OpenAI({
+    apiKey: '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'
+});
+
+
+
 router.post('/', async (req, res) => {
     const promptInfo = req.body;
-    const openai = configuratonCreate();
     try{
         const completion = await openai.chat.completions.create({
             messages: [
                 {
                   role: "system",
-                  content: "You are a helpful assistant designed to output JSON.",
+                  content: systemContent,
                 },
-                { role: "user", content: "Who won the world series in 2020?" },
+                { role: "user", content: promptInfo.prompt },
               ],
-              model: "gpt-3.5-turbo-0125",
+              model: "gpt-3.5-turbo",
           });
-        
+    res.send(completion.choices[0]?.message.content);
     }catch(e){
         console.error(e);
     }
@@ -37,14 +32,13 @@ router.post('/', async (req, res) => {
 
 router.post('/image', async (req, res) => {
     const promptInfo = req.body;
-    const openai = configuratonCreate();
     try{
-    const response = await openai.createImage({
+    const response = await openai.images.generate({
         prompt: promptInfo.prompt,
         n: 1,
         size: "512x512",
       });
-    res.send(response.data.data[0].url);
+    res.send(response.data[0]);
     }catch (e){
         console.error(e);
     }
